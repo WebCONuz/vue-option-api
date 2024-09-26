@@ -57,8 +57,15 @@ export default {
       >
         Delete Card
       </button>
+      <p class="text-center mt-3">
+        <router-link to="/about" class="">
+          About sahifasiga o'tish
+        </router-link>
+      </p>
       <p class="text-center my-3">
-        <router-link to="about" class=""> About sahifasiga o'tish </router-link>
+        <router-link to="/login" class="">
+          Login sahifasiga o'tish
+        </router-link>
       </p>
     </div>
   </main>

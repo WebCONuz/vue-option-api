@@ -13,6 +13,16 @@ const router = createRouter({
       name: "about",
       component: () => import("../views/AboutView.vue"),
     },
+    {
+      path: "/error",
+      name: "error",
+      component: () => import("../views/ErrorView.vue"),
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/LoginView.vue"),
+    },
   ],
 });
 

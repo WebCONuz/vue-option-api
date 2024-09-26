@@ -1,11 +1,23 @@
 <script>
+import axios from "../api/axios.js";
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      products: [],
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    async getProducts() {
+      const res = await axios.get("https://dummyjson.com/products");
+      if (res.status === 200) {
+        this.products = res.data.products;
+      }
+    },
+  },
+  mounted() {
+    this.getProducts();
+  },
 };
 </script>
 
@@ -18,6 +30,7 @@ export default {
       <p class="text-center my-3">
         <router-link to="/" class=""> Bosh sahifasiga o'tish </router-link>
       </p>
+      <pre>{{ products }}</pre>
     </div>
   </main>
 </template>
