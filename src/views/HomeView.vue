@@ -67,6 +67,11 @@ export default {
           Login sahifasiga o'tish
         </router-link>
       </p>
+      <p class="text-center my-3">
+        <router-link to="/products" class="">
+          Products sahifasiga o'tish
+        </router-link>
+      </p>
     </div>
   </main>
 </template>

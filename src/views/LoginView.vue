@@ -33,18 +33,20 @@ export default {
 </script>
 
 <template>
-  <main class="my-10">
-    <div class="container flex gap-x-5">
-      <div class="w-1/2 bg-[#E2F0FF] flex flex-col items-center">
-        <img src="/logo.png" alt="logo" class="w-full mb-2" />
+  <main class="my-0">
+    <div class="container h-screen py-10 flex gap-x-5">
+      <div
+        class="w-1/2 bg-[#E2F0FF] flex items-center justify-center rounded-lg"
+      >
+        <img src="/logo.png" alt="logo" class="w-4/5" />
       </div>
-      <div class="w-1/2 py-[100px] flex justify-center">
+      <div class="w-1/2 flex items-center justify-center">
         <form class="block w-[440px]" @submit.prevent="sendData">
-          <h3 class="font-semibold text-2xl">Welcome back!</h3>
-          <p class="font-semibold text-lg mt-3 mb-16">
+          <h3 class="font-semibold text-3xl">Welcome back!</h3>
+          <p class="font-semibold text-lg mt-2 mb-10 text-gray-500">
             Please login to access your account.
           </p>
-          <div class="mb-8">
+          <div class="mb-6">
             <label for="usergmail">G-mail</label>
             <input
               id="usergmail"
@@ -54,7 +56,7 @@ export default {
               v-model="usergmail"
             />
           </div>
-          <div class="mb-11">
+          <div class="mb-9">
             <label for="userPassword">Password</label>
             <input
               id="userPassword"
