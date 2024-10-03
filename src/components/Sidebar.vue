@@ -11,6 +11,7 @@ export default {
         {
           icon: "bx bxs-user-detail",
           text: "Ustozlar",
+          to: "/teachers",
         },
         {
           icon: "bx bx-user",
@@ -23,6 +24,7 @@ export default {
         {
           icon: "bx bxl-product-hunt",
           text: "Maxsulotlar",
+          to: "/products",
         },
         {
           icon: "bx bx-food-menu",
@@ -50,7 +52,7 @@ export default {
   <aside class="bg-purple-600 pl-11 pt-10">
     <nav>
       <router-link
-        to="#"
+        :to="item?.to || '#'"
         class="flex items-center py-3 px-6 hover:bg-blue-200 rounded-l-full group duration-200"
         v-for="(item, index) in navItems"
         :key="index + Math.random()"

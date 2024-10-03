@@ -1,13 +1,23 @@
 <script setup>
-import Sidebar from "../components/Sidebar.vue";
-import Header from "../components/Header.vue";
-import { ref, reactive, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import Search from "../components/Search.vue";
-import AdminCard from "../components/AdminCard.vue";
 import axios from "../api/axios.js";
 
-const teachers = ref([]);
+const products = ref([]);
 const loading = ref(false);
+
+const headers = [
+  { title: "Rasmi", value: "thumbnail" },
+  { title: "Nomi", value: "title" },
+  { title: "Narxi", value: "price" },
+  { title: "Reyring", value: "rating" },
+  { title: "Turi", value: "category" },
+  { title: "Ishlab chiqaruvchi", value: "brand" },
+  { title: "Vazni", value: "weight" },
+  { title: "Fikrlar", value: "reviews" },
+  { title: "Actions", value: "actions" },
+];
+
 async function getData(searchString) {
   try {
     loading.value = true;
@@ -17,10 +27,10 @@ async function getData(searchString) {
         `https://dummyjson.com/users/search?q=${searchString}`
       );
     } else {
-      response = await axios.get("https://dummyjson.com/users");
+      response = await axios.get("https://dummyjson.com/products");
     }
     if (response.status === 200) {
-      teachers.value = response.data.users;
+      products.value = response.data.products;
     }
   } catch (error) {
     console.log(error);
@@ -36,33 +46,35 @@ onMounted(() => {
 
 <template>
   <main class="flex">
-    <Sidebar class="w-1/5 h-screen sticky top-0 left-0" />
+    <AdminSidebar class="w-1/5 h-screen sticky top-0 left-0" />
     <div class="w-4/5 bg-blue-200">
-      <Header title="Ustozlar"></Header>
+      <AdminHeader title="Ustozlar" />
       <div class="px-8 py-8">
-        <!-- CONTENT -->
         <Search :searchFunction="getData" />
-        <section
-          v-if="loading"
-          class="w-full h-[60vh] flex items-center justify-center"
-        >
-          <span class="uppercase text-3xl font-semibold text-purple-600"
-            >Loading...</span
-          >
-        </section>
-        <div v-else>
-          <section
-            v-if="teachers.length === 0"
-            class="w-full h-[60vh] flex items-center justify-center bg-white rounded-xl"
-          >
-            <span class="uppercase text-3xl font-bold text-purple-600">
-              Not Found
-            </span>
-          </section>
-          <section v-else class="grid grid-cols-4 gap-8">
-            <AdminCard v-for="item in teachers" :key="item?.id" :data="item" />
-          </section>
-        </div>
+        <AdminTable :data="products" :headers="headers">
+          <template #td_thumbnail="{ item }">
+            <img :src="item?.thumbnail" alt="prosuct-image" class="w-14" />
+          </template>
+          <template #td_reviews="{ item }">
+            {{ item?.reviews?.length }} ta firk
+          </template>
+          <template #td_weight="{ item }"> {{ item?.weight }} kg </template>
+          <template #td_price="{ item }"> $ {{ item?.price }} </template>
+          <template #td_brand="{ item }"> {{ item?.brand }} </template>
+          <template #td_rating="{ item }">
+            <div class="flex items-center">
+              <i class="bx bx-star text-yellow-400 text-xl mr-2"></i>
+              <span>{{ item?.rating }}</span>
+            </div>
+          </template>
+          <template #td_actions="{ item }">
+            <div class="flex items-center gap-x-2">
+              <i class="bx bx-show-alt text-blue-500 text-xl"></i>
+              <i class="bx bx-edit text-green-500 text-xl"></i>
+              <i class="bx bx-trash text-red-500 text-xl"></i>
+            </div>
+          </template>
+        </AdminTable>
       </div>
     </div>
   </main>
